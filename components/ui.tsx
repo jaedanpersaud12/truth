@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView, animate } from "framer-motion";
-import { ReactNode, useEffect, useRef } from "react";
+import { CSSProperties, ReactNode, useEffect, useRef } from "react";
 
 export function Slide({
   num,
@@ -61,24 +61,24 @@ export function Reveal({
 export function Scatter({
   words,
   color = "#000",
-  shadow,
 }: {
   words: { text: string; x: number; y: number }[];
   color?: string;
-  shadow?: boolean;
 }) {
+  const variant = color.toLowerCase() === "#fff" || color.toLowerCase() === "#ffffff" ? "light" : "dark";
   return (
-    <div className="scatter-stage">
+    <div className="scatter-stage" data-variant={variant}>
       {words.map((w, i) => (
         <motion.span
           key={`${w.text}-${i}`}
           className="display-word"
-          style={{
-            left: `${w.x}%`,
-            top: `${w.y}%`,
-            color,
-            textShadow: shadow ? "0 2px 14px rgba(0,0,0,0.45)" : undefined,
-          }}
+          style={
+            {
+              "--x": `${w.x}%`,
+              "--y": `${w.y}%`,
+              color,
+            } as CSSProperties
+          }
           initial={{ opacity: 0, y: 26, scale: 0.96 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.4 }}

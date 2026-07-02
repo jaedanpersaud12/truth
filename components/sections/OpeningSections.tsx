@@ -113,7 +113,6 @@ export function Everyone() {
       />
       <Scatter
         color="#fff"
-        shadow
         words={[
           { text: "EVERYONE", x: 20.4, y: 14 },
           { text: "HAS", x: 53.2, y: 25.1 },

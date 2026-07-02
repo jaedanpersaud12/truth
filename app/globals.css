@@ -116,10 +116,71 @@ video {
 .scatter-stage {
   position: absolute;
   inset: 0;
+  /* form a stacking context so the mobile readability scrim (::before, z-index:-1)
+     sits above the background media instead of behind it */
+  isolation: isolate;
 }
 
 .scatter-stage .display-word {
   position: absolute;
+  left: var(--x);
+  top: var(--y);
+}
+
+.scatter-stage[data-variant="light"] .display-word {
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width: 720px) {
+  .scatter-stage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(0.5rem, 2vh, 1.1rem);
+    padding: 0 clamp(1.25rem, 6vw, 2rem);
+  }
+
+  /* readability scrim behind the stacked words */
+  .scatter-stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  .scatter-stage[data-variant="dark"]::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 254, 252, 0.55) 0%,
+      rgba(255, 254, 252, 0.25) 45%,
+      rgba(255, 254, 252, 0) 75%
+    );
+  }
+
+  .scatter-stage[data-variant="light"]::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.2) 55%,
+      rgba(0, 0, 0, 0) 90%
+    );
+  }
+
+  .scatter-stage .display-word {
+    position: static;
+    font-size: clamp(2.6rem, 12vw, 4rem);
+    white-space: normal;
+  }
+
+  .scatter-stage[data-variant="dark"] .display-word {
+    text-shadow: 0 1px 2px rgba(255, 254, 252, 0.95),
+      0 0 10px rgba(255, 254, 252, 0.7);
+  }
+
+  .scatter-stage[data-variant="light"] .display-word {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85), 0 0 14px rgba(0, 0, 0, 0.6);
+  }
 }
 
 /* ---------- hero ---------- */
@@ -180,6 +241,21 @@ video {
   object-fit: cover;
   height: 100%;
   min-width: 0;
+}
+
+@media (max-width: 720px) {
+  .inside-media {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .inside-media .still,
+  .inside-media .clip {
+    flex: none;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+  }
 }
 
 /* ---------- gradient overlay slides (7, 13) ---------- */
