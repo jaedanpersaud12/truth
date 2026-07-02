@@ -1,0 +1,601 @@
+:root {
+  --bg: #fffefc;
+  --ink: #000;
+  --visited: #c9daf8;
+  --remaining: #9900ff;
+  --lavender: #d9d2e9;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Helvetica Neue", Helvetica, Inter, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+img,
+video {
+  display: block;
+}
+
+/* ---------- slide chrome ---------- */
+
+.slide {
+  position: relative;
+  min-height: 100svh;
+  scroll-snap-align: start;
+  overflow: hidden;
+}
+
+.slide.pad {
+  padding: clamp(1.25rem, 3.5vw, 3rem) clamp(1.25rem, 4vw, 4rem);
+}
+
+.rule {
+  position: absolute;
+  top: clamp(0.9rem, 2.2vw, 1.6rem);
+  left: clamp(1.25rem, 4vw, 4rem);
+  right: clamp(1.25rem, 4vw, 4rem);
+  border-top: 1.5px solid var(--ink);
+}
+
+.slide.pad .content {
+  position: relative;
+  padding-top: clamp(1rem, 2.5vw, 2rem);
+}
+
+.pagenum {
+  position: absolute;
+  right: clamp(1rem, 3vw, 2.5rem);
+  bottom: clamp(0.8rem, 2vw, 1.5rem);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  z-index: 20;
+}
+
+.pagenum.light {
+  color: #fff;
+}
+
+/* ---------- shared media ---------- */
+
+.bg-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- typography ---------- */
+
+.display-word {
+  font-weight: 700;
+  font-size: clamp(2rem, 5.2vw, 4.4rem);
+  letter-spacing: 0.01em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.kicker {
+  font-weight: 700;
+  font-size: clamp(0.95rem, 1.5vw, 1.25rem);
+  line-height: 1.35;
+}
+
+.statement {
+  font-weight: 700;
+  font-size: clamp(1.3rem, 2.3vw, 1.9rem);
+  line-height: 1.35;
+}
+
+.small-label {
+  font-weight: 700;
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  letter-spacing: 0.06em;
+}
+
+/* ---------- scattered word slides ---------- */
+
+.scatter-stage {
+  position: absolute;
+  inset: 0;
+}
+
+.scatter-stage .display-word {
+  position: absolute;
+}
+
+/* ---------- hero ---------- */
+
+.hero-footer {
+  position: absolute;
+  left: clamp(1.25rem, 4vw, 4rem);
+  right: clamp(1.25rem, 4vw, 4rem);
+  bottom: clamp(1rem, 2.5vw, 2rem);
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  font-weight: 700;
+  font-size: clamp(0.8rem, 1.1vw, 1rem);
+  z-index: 10;
+}
+
+/* ---------- slide 2 caption ---------- */
+
+.photo-caption {
+  position: absolute;
+  left: clamp(1.25rem, 4vw, 4rem);
+  bottom: clamp(1.5rem, 4vw, 3rem);
+  max-width: min(34rem, 80vw);
+  z-index: 10;
+}
+
+.photo-caption .scrim {
+  position: absolute;
+  inset: -2rem -3rem -2rem -4rem;
+  background: radial-gradient(
+    ellipse at 30% 70%,
+    rgba(255, 254, 252, 0.85) 0%,
+    rgba(255, 254, 252, 0.55) 55%,
+    rgba(255, 254, 252, 0) 75%
+  );
+  z-index: -1;
+}
+
+/* ---------- slide 3 inside ---------- */
+
+.inside-media {
+  display: flex;
+  gap: clamp(0.75rem, 1.5vw, 1.5rem);
+  margin-top: clamp(1.25rem, 3vw, 2.5rem);
+  height: min(62vh, 40rem);
+}
+
+.inside-media .still {
+  flex: 0 0 30%;
+  object-fit: cover;
+  height: 100%;
+  min-width: 0;
+}
+
+.inside-media .clip {
+  flex: 1 1 auto;
+  object-fit: cover;
+  height: 100%;
+  min-width: 0;
+}
+
+/* ---------- gradient overlay slides (7, 13) ---------- */
+
+.fade-right {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.12) 32%,
+    rgba(255, 254, 252, 0.72) 62%,
+    rgba(255, 254, 252, 0.97) 88%
+  );
+}
+
+.right-col {
+  position: absolute;
+  top: clamp(2.5rem, 7vh, 4.5rem);
+  right: clamp(1.25rem, 4vw, 4rem);
+  width: min(46%, 34rem);
+  z-index: 10;
+}
+
+@media (max-width: 720px) {
+  .right-col {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    padding: 6rem 1.25rem 3rem;
+  }
+
+  .fade-right {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(255, 254, 252, 0.9) 55%
+    );
+  }
+}
+
+/* ---------- stats slide ---------- */
+
+.stats-map {
+  position: absolute;
+  inset: 8% 4%;
+  background: url("/assets/image5.webp") center / contain no-repeat;
+  opacity: 0.9;
+}
+
+.stats-row {
+  position: absolute;
+  left: clamp(1.25rem, 4vw, 4rem);
+  right: clamp(1.25rem, 4vw, 4rem);
+  bottom: clamp(2rem, 7vh, 4rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.stat {
+  text-align: left;
+}
+
+.stat .num {
+  font-weight: 700;
+  font-size: clamp(4.5rem, 15vw, 13rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.stat .label {
+  margin-top: 0.75rem;
+}
+
+/* ---------- photo grids ---------- */
+
+.grid-2x2,
+.grid-3x3 {
+  position: absolute;
+  inset: 0;
+  display: grid;
+}
+
+.grid-2x2 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.grid-3x3 {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.grid-cell {
+  position: relative;
+  overflow: hidden;
+}
+
+.grid-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.grid-cell .cap {
+  position: absolute;
+  left: 1rem;
+  bottom: 0.9rem;
+  color: #fff;
+  font-weight: 700;
+  font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.65);
+}
+
+.grid-caption {
+  position: absolute;
+  left: clamp(1.25rem, 4vw, 4rem);
+  bottom: clamp(1.5rem, 4vh, 2.5rem);
+  color: #fff;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 1.5vw, 1.25rem);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+
+/* ---------- US map slide ---------- */
+
+.usmap-layout {
+  display: grid;
+  grid-template-columns: minmax(16rem, 36%) 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: start;
+  height: 100%;
+}
+
+.usmap-wrap {
+  position: relative;
+  align-self: center;
+}
+
+.usmap-wrap > img {
+  width: 100%;
+  height: auto;
+}
+
+.map-dot {
+  position: absolute;
+  width: clamp(8px, 1vw, 12px);
+  height: clamp(8px, 1vw, 12px);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.map-dot.visited {
+  background: var(--visited);
+  border: 1px solid #9db9ea;
+}
+
+.map-dot.remaining {
+  background: var(--remaining);
+}
+
+.usmap-inset {
+  position: relative;
+  width: 44%;
+  margin-top: 4%;
+  margin-left: 4%;
+}
+
+.usmap-inset > img {
+  width: 100%;
+  height: auto;
+}
+
+.map-legend {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.map-legend .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 0.45rem;
+  vertical-align: baseline;
+}
+
+.footnote {
+  font-size: clamp(0.7rem, 0.95vw, 0.85rem);
+  line-height: 1.5;
+  max-width: 26rem;
+}
+
+@media (max-width: 860px) {
+  .usmap-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- locations slide ---------- */
+
+.loc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: clamp(1.5rem, 3vw, 3rem);
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+  max-width: 46rem;
+}
+
+.loc {
+  border-top: 1.5px solid var(--ink);
+  padding-top: 0.8rem;
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  line-height: 1.45;
+}
+
+.loc b {
+  display: block;
+}
+
+/* ---------- specs slide 13 ---------- */
+
+.spec-list {
+  margin-top: clamp(1.5rem, 4vh, 2.5rem);
+  font-size: clamp(0.85rem, 1.15vw, 1rem);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.spec-list b {
+  font-weight: 700;
+}
+
+.overlay-title {
+  position: absolute;
+  top: clamp(2.5rem, 7vh, 4.5rem);
+  left: clamp(1.25rem, 4vw, 4rem);
+  color: #fff;
+  z-index: 10;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- quotes slide ---------- */
+
+.slide.vcenter .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(100svh - clamp(2.5rem, 7vw, 6rem));
+}
+
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 3vh, 2.5rem) clamp(0.8rem, 1.6vw, 1.5rem);
+  margin-top: clamp(0.5rem, 2vh, 1.5rem);
+}
+
+@media (max-width: 860px) {
+  .quotes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.quote-card {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.quote-card.flip {
+  flex-direction: row-reverse;
+}
+
+.bubble {
+  position: relative;
+  flex: 1 1 auto;
+  border: 2.5px solid var(--ink);
+  border-radius: 18px;
+  background: var(--bg);
+  padding: 0.9rem 1rem;
+  font-size: clamp(0.72rem, 0.95vw, 0.88rem);
+  font-weight: 700;
+  line-height: 1.45;
+  z-index: 2;
+}
+
+.bubble em {
+  font-style: normal;
+  font-size: clamp(1.15rem, 1.7vw, 1.55rem);
+  line-height: 1.1;
+}
+
+.bubble::before,
+.bubble::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+}
+
+/* tail pointing right */
+.quote-card:not(.flip) .bubble::before {
+  right: -14px;
+  transform: translateY(-50%);
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  border-left: 15px solid var(--ink);
+}
+
+.quote-card:not(.flip) .bubble::after {
+  right: -9px;
+  transform: translateY(-50%);
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 12px solid var(--bg);
+}
+
+/* tail pointing left */
+.quote-card.flip .bubble::before {
+  left: -14px;
+  transform: translateY(-50%);
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  border-right: 15px solid var(--ink);
+}
+
+.quote-card.flip .bubble::after {
+  left: -9px;
+  transform: translateY(-50%);
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 12px solid var(--bg);
+}
+
+.quote-face {
+  flex: 0 0 clamp(4.5rem, 8vw, 7rem);
+  width: clamp(4.5rem, 8vw, 7rem);
+  height: clamp(5rem, 9vw, 7.8rem);
+}
+
+.quote-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom;
+}
+
+/* ---------- team slide ---------- */
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2.5rem) clamp(1rem, 2vw, 2rem);
+  margin-top: clamp(1.5rem, 4vh, 3rem);
+}
+
+@media (max-width: 860px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.member {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.member img {
+  flex: 0 0 clamp(4.5rem, 7vw, 6.5rem);
+  width: clamp(4.5rem, 7vw, 6.5rem);
+  height: clamp(5.5rem, 9vw, 8rem);
+  object-fit: cover;
+}
+
+.member .bio {
+  font-size: clamp(0.75rem, 1vw, 0.9rem);
+  line-height: 1.45;
+}
+
+.member .bio b {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* ---------- contact ---------- */
+
+.contact-body {
+  margin-top: auto;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  line-height: 1.5;
+  max-width: 30rem;
+}
+
+.contact-body > div + div {
+  margin-top: 1.4rem;
+}
+
+.contact-body a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.slide.contact .content {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - clamp(2.5rem, 7vw, 6rem));
+  padding-bottom: clamp(2rem, 6vh, 4rem);
+}

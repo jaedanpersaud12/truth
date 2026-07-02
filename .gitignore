@@ -1,0 +1,7 @@
+node_modules/
+.next/
+next-env.d.ts
+
+# original deck + raw extracted assets (~180MB) — compressed web copies live in public/assets
+Copy of Truth Booth 2026_Motion.pptx
+truth_booth_assets/
