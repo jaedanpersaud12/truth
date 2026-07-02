@@ -3,36 +3,29 @@
 import { motion } from "framer-motion";
 import { CountUp, Reveal, Scatter, Slide } from "@/components/ui";
 
-/* Slide 1 — hero: booth at sunset, "IN SEARCH OF THE (TRUTH) 2026" */
+/* Hero — contained banner image (see SiteNav for the top wordmark bar) */
 export function Hero() {
   return (
-    <Slide className="hero">
-      <motion.img
-        className="bg-media"
-        src="/assets/image30.webp"
-        alt="The Truth Booth — a giant inflatable speech bubble — on a mountain ridge at sunset"
-        initial={{ scale: 1.06 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 2.4, ease: "easeOut" }}
-      />
-      <Scatter
-        words={[
-          { text: "IN", x: 28.5, y: 13.3 },
-          { text: "SEARCH", x: 31.3, y: 21.5 },
-          { text: "OF", x: 59.6, y: 29.7 },
-          { text: "THE", x: 29.8, y: 38 },
-        ]}
-      />
-      <motion.div
-        className="hero-footer"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 1 }}
-      >
-        <span>A project by ©AUSE COLLECTIVE</span>
-        <span>2026</span>
-      </motion.div>
-    </Slide>
+    <section className="hero-banner">
+      <div className="hero-image-wrap">
+        <motion.img
+          src="/assets/image30.webp"
+          alt="The Truth Booth — a giant inflatable speech bubble — on a mountain ridge at sunset"
+          initial={{ scale: 1.06 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 2.4, ease: "easeOut" }}
+        />
+        <span className="hero-caption">A project by ©AUSE COLLECTIVE</span>
+        <motion.span
+          className="hero-scroll-cue"
+          aria-hidden
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+        >
+          ↓
+        </motion.span>
+      </div>
+    </section>
   );
 }
 
