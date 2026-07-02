@@ -67,6 +67,7 @@ video {
   font-weight: 500;
   letter-spacing: 0.04em;
   z-index: 20;
+  pointer-events: none;
 }
 
 .pagenum.light {
@@ -116,9 +117,8 @@ video {
 .scatter-stage {
   position: absolute;
   inset: 0;
-  /* form a stacking context so the mobile readability scrim (::before, z-index:-1)
-     sits above the background media instead of behind it */
-  isolation: isolate;
+  /* let clicks reach the video controls underneath */
+  pointer-events: none;
 }
 
 .scatter-stage .display-word {
@@ -141,45 +141,19 @@ video {
     padding: 0 clamp(1.25rem, 6vw, 2rem);
   }
 
-  /* readability scrim behind the stacked words */
-  .scatter-stage::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-  }
-
-  .scatter-stage[data-variant="dark"]::before {
-    background: linear-gradient(
-      to bottom,
-      rgba(255, 254, 252, 0.55) 0%,
-      rgba(255, 254, 252, 0.25) 45%,
-      rgba(255, 254, 252, 0) 75%
-    );
-  }
-
-  .scatter-stage[data-variant="light"]::before {
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.5) 0%,
-      rgba(0, 0, 0, 0.2) 55%,
-      rgba(0, 0, 0, 0) 90%
-    );
-  }
-
   .scatter-stage .display-word {
     position: static;
     font-size: clamp(2.6rem, 12vw, 4rem);
     white-space: normal;
   }
 
+  /* tight shadow for legibility — no faded scrim box */
   .scatter-stage[data-variant="dark"] .display-word {
-    text-shadow: 0 1px 2px rgba(255, 254, 252, 0.95),
-      0 0 10px rgba(255, 254, 252, 0.7);
+    text-shadow: 0 1px 2px rgba(255, 254, 252, 0.6);
   }
 
   .scatter-stage[data-variant="light"] .display-word {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85), 0 0 14px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
   }
 }
 
@@ -206,6 +180,8 @@ video {
   bottom: clamp(1.5rem, 4vw, 3rem);
   max-width: min(34rem, 80vw);
   z-index: 10;
+  /* let clicks reach the video controls underneath */
+  pointer-events: none;
 }
 
 .photo-caption .scrim {

@@ -43,7 +43,8 @@ export function WhatIsIt() {
       <video
         className="bg-media"
         src="/assets/booth-inflate.mp4"
-        autoPlay
+        poster="/assets/booth-inflate-poster.jpg"
+        controls
         muted
         loop
         playsInline
@@ -87,7 +88,8 @@ export function Inside() {
           <motion.video
             className="clip"
             src="/assets/booth-inside.mp4"
-            autoPlay
+            poster="/assets/booth-inside-poster.jpg"
+            controls
             muted
             loop
             playsInline
@@ -133,7 +135,8 @@ export function WhatIsYours() {
       <video
         className="bg-media"
         src="/assets/booth-speaker.mp4"
-        autoPlay
+        poster="/assets/booth-speaker-poster.jpg"
+        controls
         muted
         loop
         playsInline
