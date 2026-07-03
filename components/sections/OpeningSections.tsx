@@ -1,12 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SiteNav } from "@/components/SiteNav";
 import { CountUp, Reveal, Scatter, Slide } from "@/components/ui";
 
-/* Hero — contained banner image (see SiteNav for the top wordmark bar) */
+/* Hero — full-viewport banner with the overlaid site nav */
 export function Hero() {
   return (
     <section className="hero-banner">
+      <SiteNav />
       <div className="hero-image-wrap">
         <motion.img
           src="/assets/image30.webp"
@@ -43,7 +45,6 @@ export function WhatIsIt() {
         playsInline
       />
       <div className="photo-caption">
-        <div className="scrim" />
         <Reveal>
           <p className="kicker">
             The Truth Booth is a giant, inflatable speech bubble and a video
@@ -82,7 +83,7 @@ export function Inside() {
             className="clip"
             src="/assets/booth-inside.mp4"
             poster="/assets/booth-inside-poster.jpg"
-            controls
+            autoPlay
             muted
             loop
             playsInline

@@ -120,7 +120,7 @@ export function AmericanPortrait() {
           </div>
           <div className="map-legend">
             <span>
-              <span className="dot" style={{ background: "var(--visited)", border: "1px solid #9db9ea" }} />
+              <span className="dot" style={{ background: "var(--visited)" }} />
               = Visited
             </span>
             <span>

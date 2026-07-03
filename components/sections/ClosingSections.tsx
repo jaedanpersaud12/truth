@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { FormEvent, ReactNode, useState } from "react";
 import { Reveal, Slide } from "@/components/ui";
 
 /* Slide 14 — wall of recorded truths */
@@ -190,10 +190,59 @@ export function Team() {
   );
 }
 
+function ContactForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    const subject = encodeURIComponent(
+      `Truth Booth inquiry${name ? ` from ${name}` : ""}`
+    );
+    const body = encodeURIComponent(`${message}\n\n— ${name}\n${email}`);
+    window.location.href = `mailto:sam@songhacompany.com?subject=${subject}&body=${body}`;
+  }
+
+  return (
+    <form className="contact-form" onSubmit={handleSubmit}>
+      <label>
+        Name
+        <input
+          required
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </label>
+      <label>
+        Email
+        <input
+          required
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </label>
+      <label>
+        Message
+        <textarea
+          required
+          rows={4}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+      </label>
+      <button type="submit">Send</button>
+      <span className="form-note">Opens your email client to send.</span>
+    </form>
+  );
+}
+
 /* Slide 16 — contact */
 export function Contact() {
   return (
-    <Slide num={16} rule pad className="contact">
+    <Slide id="contact" num={16} rule pad className="contact">
       <div className="content">
         <Reveal>
           <h2 className="statement">Contact</h2>
@@ -222,6 +271,9 @@ export function Contact() {
             <p>Thank you.</p>
           </Reveal>
         </div>
+        <Reveal delay={0.6}>
+          <ContactForm />
+        </Reveal>
       </div>
     </Slide>
   );

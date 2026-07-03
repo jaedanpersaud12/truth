@@ -1,4 +1,3 @@
-import { SiteNav } from "@/components/SiteNav";
 import {
   Everyone,
   FacesInterlude,
@@ -25,7 +24,6 @@ import {
 export default function Page() {
   return (
     <main>
-      <SiteNav />
       <Hero />
       <WhatIsIt />
       <Inside />

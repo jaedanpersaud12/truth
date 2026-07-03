@@ -4,6 +4,7 @@ import { motion, useInView, animate } from "framer-motion";
 import { CSSProperties, ReactNode, useEffect, useRef } from "react";
 
 export function Slide({
+  id,
   num,
   lightNum,
   rule,
@@ -11,6 +12,7 @@ export function Slide({
   className,
   children,
 }: {
+  id?: string;
   num?: number;
   lightNum?: boolean;
   rule?: boolean;
@@ -19,7 +21,7 @@ export function Slide({
   children: ReactNode;
 }) {
   return (
-    <section className={`slide ${pad ? "pad" : ""} ${className ?? ""}`}>
+    <section id={id} className={`slide ${pad ? "pad" : ""} ${className ?? ""}`}>
       {rule && <div className="rule" />}
       {children}
       {num !== undefined && (
